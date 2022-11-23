@@ -1,31 +1,65 @@
 //Global Variables
+int appWidth, appHeight;
 Boolean start=false, noNowReallyStart=false;
+float quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight;
 //
-void setup() {} //End setup
-//
-void draw()
+void setup()
 {
-  if ( noNowReallyStart==true ) background(0); //Night Mode not considered yet
+  //Display & Orientation Algorithms not consider yet
+  size(400, 300); //Landscape
+  //fullScreen(); //displayWidth, displayHeight
+  appWidth = width;
+  appHeight = height;
+  //
+  //Population
+  float centerX = appWidth * 1/2;
+  float centerY = appHeight * 1/2;
+  quitButtonX = centerX - ( appWidth * 1/4 );
+  quitButtonY = centerY - ( appHeight * 1/4 );
+  quitButtonWidth = appWidth * 1/2; //could be centerX, but that is a point
+  quitButtonHeight = appHeight * 1/2; //same comment as centerX, point not line
+} //End setup
+//
+void draw ()//when press center, it shouldnt quit.
+{
+  if ( noNowReallyStart==true ) {
+    background(0); //Night Mode not considered yet
+    //
+    //Hover Over Feature
+    println("X-value", quitButtonX, mouseX ,quitButtonX+quitButtonWidth );
+    println("Y-value", quitButtonY, mouseY ,quitButtonY+quitButtonHeight ); 
+    /*
+    if () {
+      quitButtonColour = yellow;
+    } else {
+      quitButtonColour = purple;
+    } //End Quit Button Colour
+    //
+    fill(quitButtonColour); 
+    */
+    rect( quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight ); //Quit Button with Hoverover
+  }
 } //End draw
 //
-void keyPressed()
+void keyPressed ()
 {
+  //Post-OS Level Start Button
+  if ( key==' ' && start==true) noNowReallyStart = true;
   //
-  if ( key=='w' && start==true ) noNowReallyStart = true;
+  //Prototype Key Board Quit Button OR Shortcut
+  if ( key=='Q' || key=='q') exit() ;
+  if ( key==CODED && keyCode == ESC ) exit();
   //
-  //prototype keyboard quit button or shortcut
-  if (key=='e' || key=='E') exit();
-  if (keyCode== ESC) exit();
-  //
-} //End keyPressed
+} //End KeyPressed
 //
 void mousePressed()
 {
   //
   //OS Level Start Button
   start = true;
-  println("To Start, Press The Spacebar");
-  
+  println("To Start, Press the Space Bar");
+  //
 } //End mousePressed
 //
 //End Main Program
+//
