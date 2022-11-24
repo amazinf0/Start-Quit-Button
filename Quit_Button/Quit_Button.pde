@@ -2,6 +2,7 @@
 int appWidth, appHeight;
 Boolean start=false, noNowReallyStart=false;
 float quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight;
+color quitButtonColour, yellow=#FFFF00 , purple=#FF00FF ;
 //
 void setup()
 {
@@ -10,27 +11,15 @@ void setup()
   displayOrientation();
   appWidth = width;
   appHeight = height;
+  //
   Population();
+  //  
 } //End setup
 //
-void draw ()//when press center, it shouldnt quit.
+void draw ()
 {
   if ( noNowReallyStart==true ) {
-    background(0); //Night Mode not considered yet
-    //
-    //Hover Over Feature
-    println("X-value", quitButtonX, mouseX ,quitButtonX+quitButtonWidth );
-    println("Y-value", quitButtonY, mouseY ,quitButtonY+quitButtonHeight ); 
-    /*
-    if () {
-      quitButtonColour = yellow;
-    } else {
-      quitButtonColour = purple;
-    } //End Quit Button Colour
-    //
-    fill(quitButtonColour); 
-    */
-    rect( quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight ); //Quit Button with Hoverover
+    program();
   }
 } //End draw
 //
@@ -51,6 +40,10 @@ void mousePressed()
   //OS Level Start Button
   start = true;
   println("To Start, Press the Space Bar");
+  //Hint Bug if continue pressing mouse
+  //
+  //Quit Button: Logical Rectangle, see println in draw()
+  if ( mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight ) exit();
   //
 } //End mousePressed
 //
